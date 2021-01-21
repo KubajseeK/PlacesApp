@@ -3,7 +3,6 @@ package sk.itsovy.kutka.placesapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,7 +10,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -26,7 +24,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -83,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(@NonNull Location location) {
+
                 }
 
                 @Override
@@ -104,7 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                centerMapOnLocation(lastKnownLocation, "Your Location");
+                centerMapOnLocation(lastKnownLocation, "Your Location dude.");
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
@@ -121,7 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapLongClick(LatLng latLng) {
 
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-
         String address = "";
 
         try {
@@ -152,29 +149,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MainActivity.places.add(address);
         MainActivity.locations.add(latLng);
 
-        MainActivity.arrayAdapter.notifyDataSetChanged();
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences("sk.itsovy.kutka.placesapp", Context.MODE_PRIVATE);
-
-        try {
-
-            ArrayList<String> latitudes = new ArrayList<>();
-            ArrayList<String> longitudes = new ArrayList<>();
-
-            for (LatLng coord : MainActivity.locations) {
-                latitudes.add(Double.toString(coord.latitude));
-                longitudes.add(Double.toString(coord.longitude));
-            }
-
-            sharedPreferences.edit().putString("places", ObjectSerializer.serialize(MainActivity.places)).apply();
-            sharedPreferences.edit().putString("lats", ObjectSerializer.serialize(latitudes)).apply();
-            sharedPreferences.edit().putString("longs", ObjectSerializer.serialize(longitudes)).apply();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        Toast.makeText(this, "Location Saved!", Toast.LENGTH_SHORT).show();
     }
 }

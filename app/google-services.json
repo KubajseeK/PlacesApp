@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "185912434037",
+    "project_id": "placesapp-bda7d",
+    "storage_bucket": "placesapp-bda7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185912434037:android:d7c351d7375a750001473c",
+        "android_client_info": {
+          "package_name": "sk.itsovy.kutka.placesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185912434037-fk7u9gteg0ki550p9urklqmp5grbvie9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOALn8hb2CBXs3VETAsiot9ix0qXHKvCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185912434037-fk7u9gteg0ki550p9urklqmp5grbvie9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
